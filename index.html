@@ -1,0 +1,30 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/black-tie/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  <script src="underscore-min.js"></script>
+  <script src="main.js"></script>
+</head>
+<body>
+  <div id="apiswf"></div>
+  <div id="main">
+    <h1>Artist</h1>
+    <input type="text" id="search_box"></input> <button id="search">Search</button>
+  </div>
+  <div id="player">
+    <div id="status"></div>
+    <img id="album_art" src="" width=200 height=200></img>
+    <div class=player_text">
+      <div id="artist"></div>
+      <div id="album"></div>
+      <div id="track"></div>
+    </div>
+    <div class="controls">
+      <br/>
+      <span id="play"><b>Play</b></span>&nbsp;&nbsp&nbsp;<span id="pause"><b>Pause</b></span>&nbsp;&nbsp&nbsp;<span id="dislike"><b>Dislike</b></span>
+    </div>
+  </div>
+</body>
+
