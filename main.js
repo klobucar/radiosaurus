@@ -153,29 +153,6 @@ Echo.prototype.apiCall = function(type, method, params, callback) {
   });
 };
 
-Echo.prototype.search = function(params, callback) {
-  var self = this;
-
-  this.apiCall('song', 'search', params, function(result) {
-    var list = $('#song_holder');
-    list.empty();
-
-    log(result);
-
-    $.each(result.response.songs, function() {
-      if(!this.foreign_ids) return;
-      var song = $('<li></li>').data('obj', this);
-      song.text(this.title + ' by ' + this.artist_name);
-      song.click(self.playMe);
-      list.append(song);
-    });
-
-    if(callback) {
-      callback(result.response.songs.length);
-    }
-  });
-};
-
 function Rdio() {
   var token = "GAlNwZcE_____3IyZWI3djNweXltOXZjY2pmcGtnYXpwcmxvY2FsaG9zdLxCDkEq2VNS7Y3-WVyyS8Y=",
     domain = "localhost",
@@ -219,6 +196,8 @@ Rdio.prototype.ready = function() {
 };
 
 Rdio.prototype.play = function(key) {
+  $('#play').hide();
+  $('#pause').show();
   if (!key) {
     log('Resuming player');
     playerStatus("Resumed");
@@ -231,12 +210,16 @@ Rdio.prototype.play = function(key) {
 };
 
 Rdio.prototype.stop = function() {
+  $('#play').show();
+  $('#pause').hide();
   log('stopped playing');
   playerStatus("Stopped");
   this.player.rdio_stop();
 };
 
 Rdio.prototype.pause = function() {
+  $('#play').show();
+  $('#pause').hide();
   log('Pausing');
   playerStatus("Paused");
   this.player.rdio_pause();
@@ -268,20 +251,7 @@ var rdio_callback = {
     log("response object:", _result);
     log("Song index: " + _songIndex);
     log('playstate changed ' + playState);
-   /* if ( playState == 2) {
-      if ( _result != "") {
-        for(var i=_songIndex; 14;i++) {
-          if ( _result.songs[i].foreign_ids[0] ) {
-            var rdioId = _result.songs[i].foreign_ids[0].foreign_id.split(':')[2];
-            _songIndex =i;
-            rdio.play(rdioId);
-            return;
-          }
-        } 
-      }
-    }
-    */
-    //$('#playState').text(playState);
+     //$('#playState').text(playState);
   },
 
   playingTrackChanged: function(playingTrack, sourcePosition) {

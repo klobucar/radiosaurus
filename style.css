@@ -5,3 +5,42 @@ body {
   border: 4px, solid, black;
   border-radius: 4px;
 }
+
+#play {
+  background-image:url(images/play.png);
+  display: block;
+  width: 128px; height: 128px;
+  float: left;
+  margin-top: 8px;
+}
+
+#pause {
+  background-image:url(images/pause.png);
+  display: none;
+  width: 128px; height: 128px;
+  float: left;
+  margin-top: 8px;
+}
+
+#like {
+  background-image:url(images/thumbs_up.png);
+  display: block;
+  width: 75px; height: 75px;
+  float: top;
+}
+#like:hover {
+  background-image:url(images/thumbs_up.png);
+}
+#dislike {
+  background-image:url(images/thumbs_down.png);
+  display: block;
+  width: 75px; height: 75px;
+  float: top;
+}
+#dislike:hover {
+  background-image:url(images/thumbs_down.png);
+}
+
+.thumbs {
+  float: left;
+}
