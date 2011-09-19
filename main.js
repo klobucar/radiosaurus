@@ -194,7 +194,7 @@ function Rdio() {
     token = "GA9ObZWP_____2R2cHlzNHd5ZXg3Z2M0OXdoaDY3aHdrbnJhZGlvc2F1cnVzLmNvbVtljaJJ9-K9PHbR5771ARk=";
     domain = 'radiosaurus.com';
   }
-   else if(document.location.host == 'klobucar.github.com' {
+   else if(document.location.host == 'klobucar.github.com') {
     token = "GBNOdt5o_____2R2cHlzNHd5ZXg3Z2M0OXdoaDY3aHdrbmtsb2J1Y2FyLmdpdGh1Yi5jb232XyUr7U8t4tnag69IYBIh";
     domain = "klobucar.github.com";
   }
