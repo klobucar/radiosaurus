@@ -214,6 +214,8 @@ Rdio.prototype.ready = function() {
 };
 
 Rdio.prototype.play = function(key) {
+  $('#play').hide();
+  $('#pause').show();
   if (!key) {
     log('Resuming player');
     playerStatus("Resumed");
@@ -226,12 +228,16 @@ Rdio.prototype.play = function(key) {
 };
 
 Rdio.prototype.stop = function() {
+  $('#play').show();
+  $('#pause').hide();
   log('stopped playing');
   playerStatus("Stopped");
   this.player.rdio_stop();
 };
 
 Rdio.prototype.pause = function() {
+  $('#play').show();
+  $('#pause').hide();
   log('Pausing');
   playerStatus("Paused");
   this.player.rdio_pause();
