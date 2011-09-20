@@ -2,8 +2,16 @@ body {
   background: #9ac19a;
 }
 
-.record {
-  background-image:url(images/record.png);
+#record_left {
+  background-image:url(images/record_left.png);
+  display: block;
+  width: 150px; height: 150px;
+  float: left;
+  margin: 10px 40px 0px 40px;
+}
+
+#record_right {
+  background-image:url(images/record_right.png);
   display: block;
   width: 150px; height: 150px;
   float: left;
