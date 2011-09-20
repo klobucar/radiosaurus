@@ -2,12 +2,12 @@ body {
   background: #9ac19a;
 }
 
-#record {
+.record {
   background-image:url(images/record.png);
   display: block;
   width: 150px; height: 150px;
   float: left;
-  margin: 10px 50px 0px 40px;
+  margin: 10px 40px 0px 40px;
 }
 
 #title {
@@ -98,7 +98,7 @@ body {
   background-repeat:no-repeat;
   width: 550px; height: 375px;
   position: absolute;
-  left: 300px;
+  left: 290px;
   top: 200px;
   border: 10px outset #98bf21;
 }
