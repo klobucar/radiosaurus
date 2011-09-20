@@ -28,6 +28,13 @@ $(function() {
   $('#pause').click(function() {
     rdio.pause();
   });
+  
+  var dinosaurs = new Array();
+
+  $('#like').click(function() {
+    alert('Add Dino');
+  });
+
   $('#dislike').click(function() {
     var id = _.detect(_result, function(result){ return result.foreign_ids[0].foreign_id.split(':')[2] == _nowPlaying.key;}).id,
       artist = $("#search_box").val();
