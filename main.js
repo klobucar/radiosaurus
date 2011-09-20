@@ -198,6 +198,7 @@ Rdio.prototype.ready = function() {
 Rdio.prototype.play = function(key) {
   $('#play').hide();
   $('#pause').show();
+  $('#album_art').show();
   if (!key) {
     log('Resuming player');
     playerStatus("Resumed");

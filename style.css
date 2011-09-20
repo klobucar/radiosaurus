@@ -1,6 +1,36 @@
 body {
-  background: #CDC0CE;
+  background: #9ac19a;
 }
+
+#record {
+  background-image:url(images/record.png);
+  display: block;
+  width: 150px; height: 150px;
+  float: left;
+  margin: 10px 25px 0px 10px;
+}
+
+#title {
+  background-image:url(images/title.png);
+  display: block;
+  width: 677px; height: 150px;
+  float: left;
+  margin: 8px 0px 0px 0px;
+}
+
+#main {
+  margin: 25px 0px 0px 0px;
+}
+
+#search_box {
+  margin: 8px 0px 15px 15px;
+}
+
+#album_art {
+  margin: 10px 0px 0px 4px;
+  display: none;
+}
+
 #player {
   border: 4px, solid, black;
   border-radius: 4px;
@@ -14,12 +44,28 @@ body {
   margin-top: 8px;
 }
 
+#play:hover {
+  background-image:url(images/play_hover.png);
+}
+
+#play:active {
+  background-image:url(images/play_active.png);
+}
+
 #pause {
   background-image:url(images/pause.png);
   display: none;
   width: 128px; height: 128px;
   float: left;
   margin-top: 8px;
+}
+
+#pause:hover {
+  background-image:url(images/pause_hover.png);
+}
+
+#pause:active {
+  background-image:url(images/pause_active.png);
 }
 
 #like {
@@ -29,7 +75,10 @@ body {
   float: top;
 }
 #like:hover {
-  background-image:url(images/thumbs_up.png);
+  background-image:url(images/thumbs_up_hover.png);
+}
+#like:active {
+  background-image:url(images/thumbs_up_active.png);
 }
 #dislike {
   background-image:url(images/thumbs_down.png);
@@ -38,9 +87,16 @@ body {
   float: top;
 }
 #dislike:hover {
-  background-image:url(images/thumbs_down.png);
+  background-image:url(images/thumbs_down_hover.png);
+}
+#dislike:active {
+  background-image:url(images/thumbs_down_active.png);
 }
 
 .thumbs {
   float: left;
 }
+
+.divNewline {
+  clear: both;
+} 
