@@ -121,8 +121,9 @@ $(function() {
 });
 
 function log() {
-  var log = Function.prototype.bind.call(console.log, console);
-  log.apply(console, arguments);
+  if(console && console.log) {
+    console.log.apply(console, arguments);
+  }
 }
 function Echo() {
   this.apiKey = "CQA2ZCUXD70EXQTHS";
