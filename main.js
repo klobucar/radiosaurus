@@ -71,62 +71,6 @@ $(function() {
     });
   });
 
-  var holder = $('<ul></ul>')
-  $.each(styles, function() {
-    var newStyle = $('<li></li>').data('obj', this.toString());
-    newStyle.text(this.toString());
-    holder.append(newStyle);
-  });
-
-  $('#style').html(holder.html()).selectable();
-
-  holder.empty();
-  $.each(moods, function() {
-    var newMood = $('<li></li>').data('obj', this.toString());
-    newMood.text(this.toString());
-    holder.append(newMood);
-  });
-
-  $('#moods').html(holder.html()).selectable();
-
-  $('#search').click(function() {
-    $('#loading').show();
-    $('#no_results').hide();
-    var params = {};
-
-    $.each(min_max, function(key, val) {
-      var min = key.replace('M', 'min');
-      var max = key.replace('M', 'max');
-      params[min] = $('#' + key).slider('values', 0);
-      params[max] = $('#' + key).slider('values', 1);
-    });
-
-    function getSelected(el) {
-      var items = [];
-      el.find('.ui-selected').each(function() {
-        items.push('^'+$(this).text());
-      });
-      return items.join(',');
-    }
-
-    var styles = getSelected($('#style'));
-    if(styles.length > 0) {
-      params['style'] = styles;
-    }
-
-    var moods = getSelected($('#moods'));
-    if(moods.length > 0) {
-      params['mood'] = moods;
-    }
-
-    echo.search(params, function(count) {
-      $('#loading').hide();
-      if(count == 0) {
-        $('#no_results').show();
-      }
-    });
-    return false;
-  });
 });
 
 function artistList() {
