@@ -1,6 +1,3 @@
-var _result,
-    _songIndex,
-    _nowPlaying;
 
 var manager = new jsAnimManager(40);
 
@@ -23,16 +20,13 @@ $(function() {
       $('#player').show();
       addDino();
       
-      _result = filterResults(result.response);
-      _songIndex = 1;
-      var rdioId = _result[0].foreign_ids[0].foreign_id.split(':')[2]; 
+      rdio.result = echo.filterResults(result.response);
+      rdio.songIndex = 1;
+      var rdioId = _.first(rdio.result).foreign_ids[0].foreign_id.split(':')[2]; 
       rdio.play(rdioId)
-      
+      log( _.rest(rdio.result).length - 1);
       setTimeout(function() {
-        for(var i=_songIndex; _result.length - 1;i++) {
-            rdioId = _result[i].foreign_ids[0].foreign_id.split(':')[2]; 
-            rdio.addQueue(rdioId)
-        }
+        rdio.addAllToQueue(); 
       }, 200);
     });
   });
@@ -48,41 +42,31 @@ $(function() {
   });
 
   $('#dislike').click(function() {
-    var id = _.detect(_result, function(result){ return result.foreign_ids[0].foreign_id.split(':')[2] == _nowPlaying.key;}).id,
+    var id = _.detect(rdio.result, function(result){ return result.foreign_ids[0].foreign_id.split(':')[2] == rdio.nowPlaying.key;}).id,
       artist = $("#search_box").val();
-    log("Object to skip: ",  _.detect(_result, function(result){ return result.foreign_ids[0].foreign_id.split(':')[2] == _nowPlaying.key;}));
+    log("Object to skip: ",  _.detect(rdio.result, function(result){ return result.foreign_ids[0].foreign_id.split(':')[2] == rdio.nowPlaying.key;}));
     log("ID to skip: ", id);
     artist = artist.replace(" ","+");
     rdio.clearQueue();
     echo.apiCall('playlist', 'static', {'artist': artist, 'type': 'artist-radio', 'dmca': false, 'limit': true, 'results': 30, 'variety': 0.2, 'song_id':'-' + id}, function(result) {
       log('Result:', result);
       rdio.stop() 
-      _result = filterResults(result.response);
-      _songIndex = 1;
-      var rdioId = _result[0].foreign_ids[0].foreign_id.split(':')[2]; 
+      rdio.result = echo.filterResults(result.response);
+      var rdioId = _.first(rdio.result).foreign_ids[0].foreign_id.split(':')[2]; 
       rdio.play(rdioId);
     
       setTimeout(function() {
-        for(var i=_songIndex; _result.length - 1;i++) {
-            rdioId = _result[i].foreign_ids[0].foreign_id.split(':')[2]; 
-            rdio.addQueue(rdioId);
-        }
+        rdio.addAllToQueue();
       }, 200);
     });
   });
 
 });
 
-function artistList() {
-   _.each(_result, function(num){ log(num.artist_name);});
-}
 function log() {
   if(console && console.log) {
     console.log.apply(console, arguments);
   }
-}
-function filterResults(results) {
-  return _.filter( results.songs, function(result) { return result.foreign_ids.length });
 }
 function Echo() {
   this.apiKey = "CQA2ZCUXD70EXQTHS";
@@ -114,6 +98,14 @@ Echo.prototype.apiCall = function(type, method, params, callback) {
     success: callback,
     cache: true
   });
+};
+
+Echo.prototype.artistList = function () {
+   _.each(rdio.result, function(num){ log(num.artist_name);});
+};
+
+Echo.prototype.filterResults = function (results) {
+  return _.filter( results.songs, function(result) { return result.foreign_ids.length });
 };
 
 function Rdio() {
@@ -153,11 +145,17 @@ function Rdio() {
 function playerStatus(message) {
   $('#status').html(message);
 };
+// Rdio class variables
+Rdio.prototype.result = [];
 
+Rdio.prototype.songIndex = 0;
+
+Rdio.prototype.nowPlaying = {}; 
+// Ready up!
 Rdio.prototype.ready = function() {
   this.player = $('#apiswf')[0];
 };
-
+// Rdio player control functions.
 Rdio.prototype.play = function(key) {
   $('#play').hide();
   $('#pause').show();
@@ -203,6 +201,14 @@ Rdio.prototype.next = function() {
   log("Next");
   this.player.rdio_next();
 };
+// This adds to the queue in a nice helper function.
+Rdio.prototype.addAllToQueue = function() {
+   _.each(_.rest(this.result), function(track) {
+            rdioId = track.foreign_ids[0].foreign_id.split(':')[2]; 
+            rdio.addQueue(rdioId);
+   })
+};
+
 var rdio_callback = {
   ready: function() {
     log('player ready');
@@ -223,7 +229,7 @@ var rdio_callback = {
     // Track metadata is provided as playingTrack and the position within the playing source as sourcePosition.
     log('playingTrackChanged',arguments);
     if (playingTrack != null) {
-      _nowPlaying = arguments[0];
+      rdio.nowPlaying = arguments[0];
       //$('#track').text(playingTrack['name']);
       //$('#album').text(playingTrack['album']);
       //$('#artist').text(playingTrack['artist']);
