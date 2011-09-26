@@ -1,5 +1,5 @@
 
-var manager = new jsAnimManager(40);
+//var manager = new jsAnimManager(40);
 var numDinos = 0;
 
 function addDino() {
@@ -349,3 +349,4 @@ var rdio_callback = {
 
 var echo = new Echo();
 var rdio = new Rdio();
+var manager = new jsAnimManager(40);
