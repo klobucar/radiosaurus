@@ -7,28 +7,36 @@ function addDino() {
   var anim = manager.createAnimObject("elementId"); 
 };
 
+function playNewArtist() {   
+  var artist = $("#search_box").val();
+  artist = artist.replace(" ","+");
+  //rdio.clearQueue();
+  echo.apiCall('playlist', 'static', {'artist': artist, 'type': 'artist-radio', 'dmca': false, 'limit': true, 'variety': 0.2, 'results': 30}, function(result) {
+    log('Result:', result);
+
+    $('#player').show();
+    addDino();
+
+    rdio.result = echo.filterResults(result.response);
+    rdio.songIndex = 1;
+    var rdioId = _.first(rdio.result).foreign_ids[0].foreign_id.split(':')[2]; 
+    rdio.play(rdioId)
+    log( _.rest(rdio.result).length - 1);
+    setTimeout(function() {
+      rdio.addAllToQueue(); 
+    }, 200);
+  });
+};
+
 $(function() {
-  
-  $('#search').click(function() {
-    
-    var artist = $("#search_box").val();
-    artist = artist.replace(" ","+");
-    rdio.clearQueue();
-    echo.apiCall('playlist', 'static', {'artist': artist, 'type': 'artist-radio', 'dmca': false, 'limit': true, 'variety': 0.2, 'results': 30}, function(result) {
-      log('Result:', result);
-      
-      $('#player').show();
-      addDino();
-      
-      rdio.result = echo.filterResults(result.response);
-      rdio.songIndex = 1;
-      var rdioId = _.first(rdio.result).foreign_ids[0].foreign_id.split(':')[2]; 
-      rdio.play(rdioId)
-      log( _.rest(rdio.result).length - 1);
-      setTimeout(function() {
-        rdio.addAllToQueue(); 
-      }, 200);
-    });
+
+  $('#search').click(function() { playNewArtist(); });
+  // If a user hits enter, the search starts and plays.
+  $("#search_box").keypress(function(event){
+    var code = (event.keyCode ? event.keyCode : event.which);
+    if(code == 13) {
+      $("search").click(playNewArtist());
+    } 
   });
   $('#play').click(function() {
     rdio.play();
