@@ -92,6 +92,8 @@ $(function() {
 
   $('#like').click(function() {
     addDino();
+    setTimeout(addDino, Math.random() * 300);
+    setTimeout(addDino, Math.random() * 300);
   });
 
   $('#dislike').click(function() {
