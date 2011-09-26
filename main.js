@@ -33,7 +33,7 @@ function addDino() {
             to: new Pos(dinoX + 50, dinoY),
             duration: 1000,
             loop: -1,
-            ease: jsAnimEase.bounceSmooth,
+            ease: jsAnimEase.bounceSmooth
             });
 };
 
