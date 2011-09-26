@@ -4,11 +4,13 @@ var _result,
 $(function() {
   
   $('#search').click(function() {
+    
     var artist = $("#search_box").val();
     artist = artist.replace(" ","+");
     rdio.clearQueue();
     echo.apiCall('playlist', 'static', {'artist': artist, 'type': 'artist-radio', 'dmca': false, 'limit': true, 'variety': 0.2, 'results': 30}, function(result) {
       log('Result:', result);
+      $('#player').show();
       _result = filterResults(result.response);
       _songIndex = 1;
       var rdioId = _result[0].foreign_ids[0].foreign_id.split(':')[2]; 
