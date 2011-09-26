@@ -342,7 +342,7 @@ var rdio_callback = {
     // An Rdio user can only play from one location at a time.
     // If playback begins somewhere else then playback will stop and this callback will be called.
     log('playingSomewhereElse',arguments);
-  },
+  }
   
 };
 
