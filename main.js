@@ -1,11 +1,56 @@
 
 var manager = new jsAnimManager(40);
+var numDinos = 0;
 
 function addDino() {
-  var dino = $('<div class="apatosaurus"></div>');
+  numDinos++;
+  var elementId = 'dino' + numDinos;
+  var dinoX = Math.random() * 425 - 250;
+  var dinoY = Math.random() * 265 + 50;
+  var elementIdString = '#' + elementId;
+  
+  var dinoTypeName = '';
+  var dinoNumber = Math.random() * 3;
+  if (dinoNumber < 1) {
+      dinoTypeName = 'apatosaurus';
+  } else if (dinoNumber < 2) {
+      dinoTypeName = 'stegosaurus';
+  } else {
+      dinoTypeName = 'triceratops';
+  }
+  
+  if (Math.random() * 2 < 1) {
+      dinoTypeName += '_flipped';
+  }
+  
+  var dino = $('<div class="' + dinoTypeName + '" id="' + elementId + '"></div>');
   dino.appendTo('#dinosaurs');
-  var anim = manager.createAnimObject("elementId"); 
+  dino.css({left:dinoX,top:dinoY});
+  manager.registerPosition(elementId); 
+  var anim = manager.createAnimObject(elementId);
+  anim.add({property: Prop.positionSemicircle(true),
+            from: new Pos(dinoX, dinoY),
+            to: new Pos(dinoX + 50, dinoY),
+            duration: 1000,
+            loop: -1,
+            ease: jsAnimEase.bounceSmooth,
+            });
 };
+
+function clearDinos() {
+    $('#dinosaurs').empty();
+    numDinos = 0;
+}
+
+function thinTheHerd() {
+    // Kill half of them
+    var dinosLeft = Math.floor(numDinos/2);
+    for (var i = numDinos - 1; i >= dinosLeft; i--) {
+        var elementId = '#dino' + i;
+        $(elementId).remove();
+        numDinos--;
+    }
+}
 
 function playNewArtist() {   
   var artist = $("#search_box").val();
@@ -54,6 +99,8 @@ $(function() {
       artist = $("#search_box").val();
     log("Object to skip: ",  _.detect(rdio.result, function(result){ return result.foreign_ids[0].foreign_id.split(':')[2] == rdio.nowPlaying.key;}));
     log("ID to skip: ", id);
+    //clearDinos();
+    thinTheHerd();
     artist = artist.replace(" ","+");
     rdio.clearQueue();
     echo.apiCall('playlist', 'static', {'artist': artist, 'type': 'artist-radio', 'dmca': false, 'limit': true, 'results': 30, 'variety': 0.2, 'song_id':'-' + id}, function(result) {
@@ -236,6 +283,7 @@ var rdio_callback = {
     // The currently playing track has changed.
     // Track metadata is provided as playingTrack and the position within the playing source as sourcePosition.
     log('playingTrackChanged',arguments);
+    
     if (playingTrack != null) {
       rdio.nowPlaying = arguments[0];
       //$('#track').text(playingTrack['name']);

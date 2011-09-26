@@ -131,18 +131,63 @@ body {
 }
 
 .apatosaurus {
-  background-image:url(images/apatosaurus.png);
-  background-repeat:no-repeat;
-  width: 127px;
-  height: 132px;
+    background-image:url(images/apatosaurus.png);
+    background-repeat:no-repeat;
+    width: 127px;
+    height: 132px;
+}
+
+.apatosaurus_flipped {
+    background-image:url(images/apatosaurus.png);
+    background-repeat:no-repeat;
+    width: 127px;
+    height: 132px;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
 
 .stegosaurus {
-  background-image:url(images/stegosaurus.png);
+    background-image:url(images/stegosaurus.png);
+    background-repeat:no-repeat;
+    width: 128px;
+    height: 119px;
+}
+
+.stegosaurus_flipped {
+    background-image:url(images/stegosaurus.png);
+    background-repeat:no-repeat;
+    width: 128px;
+    height: 119px;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
 
 .triceratops {
-  background-image:url(images/triceratops.png);
+    background-image:url(images/triceratops.png);
+    background-repeat:no-repeat;
+    width: 129px;
+    height: 134px;
+}
+
+.triceratops_flipped {
+    background-image:url(images/triceratops.png);
+    background-repeat:no-repeat;
+    width: 129px;
+    height: 134px;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
 
 .thumbs {
