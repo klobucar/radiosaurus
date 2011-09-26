@@ -1,7 +1,6 @@
 body {
   /* Tell me how you like the new background -JK
   background: #9ac19a; */
-  background-attachment: fixed;
   background: #f26726; /* Old browsers */
   background: -moz-linear-gradient(top, #f26726 0%, #dbd64e 37%, #175b0f 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f26726), color-stop(37%,#dbd64e), color-stop(100%,#175b0f)); /* Chrome,Safari4+ */
@@ -10,7 +9,7 @@ body {
   background: -ms-linear-gradient(top, #f26726 0%,#dbd64e 37%,#175b0f 100%); /* IE10+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f26726', endColorstr='#175b0f',GradientType=0 ); /* IE6-9 */
   background: linear-gradient(top, #f26726 0%,#dbd64e 37%,#175b0f 100%); /* W3C */
-
+  background-attachment: fixed;
 }
 
 #record_left {
@@ -19,8 +18,7 @@ body {
   width: 150px; height: 150px;
   position: absolute;
   left: 10px;
-  top: 10px;
-  
+  top: 10px;  
 }
 
 #record_right {
