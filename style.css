@@ -120,6 +120,21 @@ body {
   border: 10px outset #98bf21;
 }
 
+.apatosaurus {
+  background-image:url(images/apatosaurus.png);
+  background-repeat:no-repeat;
+  width: 127px;
+  height: 132px;
+}
+
+.stegosaurus {
+  background-image:url(images/stegosaurus.png);
+}
+
+.triceratops {
+  background-image:url(images/triceratops.png);
+}
+
 .thumbs {
   float: left;
 }

@@ -1,6 +1,15 @@
 var _result,
     _songIndex,
     _nowPlaying;
+
+var manager = new jsAnimManager(40);
+
+function addDino() {
+  var dino = $('<div class="apatosaurus"></div>');
+  dino.appendTo('#dinosaurs');
+  var anim = manager.createAnimObject("elementId"); 
+};
+
 $(function() {
   
   $('#search').click(function() {
@@ -10,7 +19,10 @@ $(function() {
     rdio.clearQueue();
     echo.apiCall('playlist', 'static', {'artist': artist, 'type': 'artist-radio', 'dmca': false, 'limit': true, 'variety': 0.2, 'results': 30}, function(result) {
       log('Result:', result);
+      
       $('#player').show();
+      addDino();
+      
       _result = filterResults(result.response);
       _songIndex = 1;
       var rdioId = _result[0].foreign_ids[0].foreign_id.split(':')[2]; 
@@ -30,11 +42,9 @@ $(function() {
   $('#pause').click(function() {
     rdio.pause();
   });
-  
-  var dinosaurs = new Array();
 
   $('#like').click(function() {
-    alert('Add Dino');
+    addDino();
   });
 
   $('#dislike').click(function() {
@@ -68,7 +78,7 @@ $(function() {
     holder.append(newStyle);
   });
 
-  $('#styles').html(holder.html()).selectable();
+  $('#style').html(holder.html()).selectable();
 
   holder.empty();
   $.each(moods, function() {
@@ -99,7 +109,7 @@ $(function() {
       return items.join(',');
     }
 
-    var styles = getSelected($('#styles'));
+    var styles = getSelected($('#style'));
     if(styles.length > 0) {
       params['style'] = styles;
     }
